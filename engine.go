@@ -56,7 +56,7 @@ func (e *Engine) ServeFiles(path string, root http.FileSystem) {
 	e.actualRouter.ServeFiles(path+"/*filepath", root)
 }
 
-// ServeFiles serves the static files
+// ServeFile serves the static files
 func (e *Engine) ServeFile(path, file string) {
 	e.actualRouter.GET(path, func(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 		http.ServeFile(writer, request, file)
@@ -104,7 +104,7 @@ func (e *Engine) CustomProvide(value interface{}, fn CustomProvideFunction) {
 	e.injector.ProvideCustom(value, fn, "default")
 }
 
-// CustomProvide provides with "default" key by calling the supplied CustomProvideFunction each time
+// CustomProvideWithKey provides with "default" key by calling the supplied CustomProvideFunction each time
 func (e *Engine) CustomProvideWithKey(key string, value interface{}, fn CustomProvideFunction) {
 	e.injector.ProvideCustom(value, fn, key)
 }
